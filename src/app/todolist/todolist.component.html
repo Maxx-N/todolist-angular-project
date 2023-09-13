@@ -1,0 +1,15 @@
+<select [(ngModel)]="filter">
+  <option value="all">ALL</option>
+  <option value="todo">TO DO</option>
+  <option value="done">DONE</option>
+</select>
+<hr />
+<button (click)="onAddTodo()">Add todo</button>
+<hr />
+<ul>
+  <li *ngFor="let todo of todos | filterTodos : filter">
+    <input type="checkbox" [(ngModel)]="todo.isDone" />
+    <input type="text" [(ngModel)]="todo.name" />
+    <button (click)="onDeleteTodo(todo.id)">X</button>
+  </li>
+</ul>
