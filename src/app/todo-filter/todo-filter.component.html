@@ -1,0 +1,5 @@
+<select [ngModel]="filter" (ngModelChange)="onFilterTodos($event)">
+  <option value="all">ALL</option>
+  <option value="todo">TO DO</option>
+  <option value="done">DONE</option>
+</select>

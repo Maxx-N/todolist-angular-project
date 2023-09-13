@@ -1,0 +1,13 @@
+<li>
+  <input
+    type="checkbox"
+    [ngModel]="todo.isDone"
+    (ngModelChange)="onUpdateIsDone($event)"
+  />
+  <input
+    type="text"
+    [ngModel]="todo.name"
+    (ngModelChange)="onUpdateName($event)"
+  />
+  <button (click)="onDeleteTodo()">X</button>
+</li>

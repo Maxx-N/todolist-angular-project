@@ -25,9 +25,29 @@ export class TodolistComponent implements OnInit {
     this.todos.push(todo);
   }
 
+  onUpdateIsDone(todoId: number, isDone: boolean): void {
+    const index = this.todos.findIndex((todo) => todo.id === todoId);
+    if (index === -1) {
+      return;
+    }
+    this.todos[index].isDone = isDone;
+  }
+
+  onUpdateName(todoId: number, name: string): void {
+    const todo = this.todos.find((todo) => todo.id === todoId);
+    if (!todo) {
+      return;
+    }
+    todo.name = name;
+  }
+
   onDeleteTodo(todoId: number): void {
     const index = this.todos.findIndex((todo) => todo.id === todoId);
     this.todos.splice(index, 1);
+  }
+
+  onFilterTodos(filter: string): void {
+    this.filter = filter;
   }
 
   private generateNewId(): number {

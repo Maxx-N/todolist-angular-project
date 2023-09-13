@@ -1,15 +1,13 @@
-<select [(ngModel)]="filter">
-  <option value="all">ALL</option>
-  <option value="todo">TO DO</option>
-  <option value="done">DONE</option>
-</select>
+<app-todo-filter [filter]="filter" (filterTodos)="onFilterTodos($event)"></app-todo-filter>
 <hr />
-<button (click)="onAddTodo()">Add todo</button>
+<app-todo-add (addTodo)="onAddTodo()"></app-todo-add>
 <hr />
 <ul>
-  <li *ngFor="let todo of todos | filterTodos : filter">
-    <input type="checkbox" [(ngModel)]="todo.isDone" />
-    <input type="text" [(ngModel)]="todo.name" />
-    <button (click)="onDeleteTodo(todo.id)">X</button>
-  </li>
+  <app-todo
+    *ngFor="let todo of todos | filterTodos : filter"
+    [todo]="todo"
+    (updateIsDone)="onUpdateIsDone(todo.id, $event)"
+    (updateName)="onUpdateName(todo.id, $event)"
+    (deleteTodo)="onDeleteTodo(todo.id)"
+  ></app-todo>
 </ul>
