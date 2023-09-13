@@ -1,1 +1,5 @@
-<app-todolist></app-todolist>
+<app-todo-favorite
+  [todos]="todos"
+></app-todo-favorite>
+<hr />
+<app-todolist [todos]="todos" [filter]="filter"></app-todolist>

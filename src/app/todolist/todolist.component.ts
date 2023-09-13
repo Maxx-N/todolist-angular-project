@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 import { Todo } from '../todo.model';
+import { TodoService } from '../todo.service';
 
 @Component({
   selector: 'app-todolist',
@@ -8,53 +9,30 @@ import { Todo } from '../todo.model';
   styleUrls: ['./todolist.component.css'],
 })
 export class TodolistComponent implements OnInit {
-  todos: Todo[] = [];
-  filter: string = 'all';
+  @Input() todos: Todo[] = [];
+  @Input() filter = '';
 
-  constructor() {}
+  constructor(private todoService: TodoService) {}
 
   ngOnInit(): void {}
 
   onAddTodo(): void {
-    const id = this.generateNewId();
-    const todo: Todo = {
-      id,
-      name: 'new task ' + id,
-      isDone: false,
-    };
-    this.todos.push(todo);
+    this.todoService.addTodo();
   }
 
   onUpdateIsDone(todoId: number, isDone: boolean): void {
-    const index = this.todos.findIndex((todo) => todo.id === todoId);
-    if (index === -1) {
-      return;
-    }
-    this.todos[index].isDone = isDone;
+    this.todoService.updateIsDone(todoId, isDone);
   }
 
   onUpdateName(todoId: number, name: string): void {
-    const todo = this.todos.find((todo) => todo.id === todoId);
-    if (!todo) {
-      return;
-    }
-    todo.name = name;
+    this.todoService.updateName(todoId, name);
   }
 
   onDeleteTodo(todoId: number): void {
-    const index = this.todos.findIndex((todo) => todo.id === todoId);
-    this.todos.splice(index, 1);
+    this.todoService.deleteTodo(todoId);
   }
 
   onFilterTodos(filter: string): void {
-    this.filter = filter;
-  }
-
-  private generateNewId(): number {
-    if (this.todos.length === 0) {
-      return 1;
-    }
-    const maxId: number = Math.max(...this.todos.map((todo) => todo.id));
-    return maxId + 1;
+    this.todoService.filterTodos(filter);
   }
 }
