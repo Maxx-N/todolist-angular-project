@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Todo } from '../todo.model';
 import { TodoService } from '../todo.service';
 
@@ -6,6 +6,7 @@ import { TodoService } from '../todo.service';
   selector: 'app-todo',
   templateUrl: './todo.component.html',
   styleUrls: ['./todo.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TodoComponent implements OnInit {
   @Input() todo!: Todo;

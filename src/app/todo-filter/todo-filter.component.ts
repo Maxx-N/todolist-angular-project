@@ -1,9 +1,10 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-todo-filter',
   templateUrl: './todo-filter.component.html',
   styleUrls: ['./todo-filter.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TodoFilterComponent implements OnInit {
   @Input() filter!: string;

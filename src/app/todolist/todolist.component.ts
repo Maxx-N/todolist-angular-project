@@ -1,4 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnInit,
+} from '@angular/core';
 
 import { Todo } from '../todo.model';
 import { TodoService } from '../todo.service';
@@ -7,6 +12,7 @@ import { TodoService } from '../todo.service';
   selector: 'app-todolist',
   templateUrl: './todolist.component.html',
   styleUrls: ['./todolist.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TodolistComponent implements OnInit {
   @Input() todos: Todo[] = [];

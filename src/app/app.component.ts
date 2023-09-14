@@ -7,17 +7,11 @@ import { TodoService } from './todo.service';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  get todos() {
-    return this.todoService.todos;
-  }
+  todos$ = this.todoService.todos$;
 
-  get filter() {
-    return this.todoService.filter
-  }
+  filter$ = this.todoService.filter$;
 
-  get favoriteId() {
-    return this.todoService.favoriteId
-  }
+  favoriteId$ = this.todoService.favoriteId$;
 
   constructor(private todoService: TodoService) {}
 }

@@ -1,8 +1,11 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   Input,
-  OnInit
+  OnInit,
 } from '@angular/core';
+import { map } from 'rxjs';
+
 import { Todo } from '../todo.model';
 import { TodoService } from '../todo.service';
 
@@ -10,13 +13,16 @@ import { TodoService } from '../todo.service';
   selector: 'app-todo-favorite',
   templateUrl: './todo-favorite.component.html',
   styleUrls: ['./todo-favorite.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TodoFavoriteComponent implements OnInit {
   @Input() todos: Todo[] = [];
 
-  get favorite() {
-    return this.todos.find((t) => t.id === this.todoService.favoriteId);
-  }
+  favorite$ = this.todoService.favoriteId$.pipe(
+    map((id) => {
+      return this.todos.find((todo) => todo.id === id);
+    })
+  );
 
   constructor(private todoService: TodoService) {}
 
